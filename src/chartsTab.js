@@ -29,7 +29,7 @@ export class ChartsTab extends React.Component {
                 console.log('about to show artists')
                 self.setState({data:data, loading:false})
             })
-        }, 100)
+        }, 10)
         
     }
     render = () => {
@@ -70,7 +70,7 @@ export class ChartsTab extends React.Component {
         return (
             <View style={styles.item} key={i}>
                 <TouchableOpacity style={styles.item} onPress={()=>this.item_onClick(data)}>
-                    <Image source={{ uri:img, cache:'only-if-cached', }} style={styles.item} />
+                    <Image source={{ uri:img, cache:'force-cache', }} style={[styles.item, {backgroundColor:colors.debug}]} />
                 </TouchableOpacity>
             </View>
         );

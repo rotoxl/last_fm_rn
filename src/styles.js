@@ -2,12 +2,14 @@ import {StyleSheet} from 'react-native'
 
 import { Dimensions } from 'react-native';
 export const colors={
-    yellow_bg:'#f9c632',
+    yellow_bg:'#efb340',
     yellow_fg_active:'#ffffff',
     yellow_fg_inactive:'#fdf7e4',
 
     header_bg:'#3c3c3c',
-    accent:'#f9c632', //yellow
+    screen_bg:'#3c3c3c',
+    
+    accent:'#efb340', //yellow
     white:'#ffffff',
     black:'black',
     // darkgray:'#4A4A4A',
@@ -20,6 +22,8 @@ export const colors={
     // green:'#62bc46',
     // blue:'#40ade4',
     // purple:'#c17fd2',
+
+    debug: 'rgba(52, 52, 52, 0.4)'
 }
 var screen=Dimensions.get('window')
 
@@ -30,13 +34,14 @@ const marginH=16, paddingH=8, paddingV=5
 const barHeight=85
 const headerHeight=posterHeight+2*marginH
 
+const relatedItemHeight=80
 export const styles = StyleSheet.create({
     throbber:{
         alignItems: 'center',
         justifyContent: 'center',
         padding: 8,
         flex:1,
-        backgroundColor:colors.white, 
+        backgroundColor:colors.screen_bg, 
     },
     // list: {
     //     justifyContent: 'flex-start',
@@ -88,9 +93,16 @@ export const styles = StyleSheet.create({
         left:marginH*2+posterWidth,
         top:marginH+(posterHeight/2)
     },
+    title_lblock:{
+        // position:'absolute',
+        left:marginH,
+        top:marginH+barHeight,
+        flex:1, 
+        color:'white',
+    },
     textWithShadow:{
-        color:'black',
-        textShadowColor: 'white',
+        color:'white',
+        textShadowColor: 'black',
         textShadowOffset: {width: 0, height: 0},
         textShadowRadius: 7
     },
@@ -103,6 +115,14 @@ export const styles = StyleSheet.create({
         flex:1, 
         width:screen.width-(marginH*2+posterWidth)
     }, 
+    chips_lcontainer:{
+        position:'absolute',
+        left:0,
+        top:marginH*2.5,
+
+        flex:1, 
+        width:screen.width-marginH*2,
+    }, 
     chip:{
         position:'relative',
         backgroundColor:colors.accent,
@@ -114,15 +134,20 @@ export const styles = StyleSheet.create({
         color:colors.white,
         width:null,
     },
-
+    fchip:{
+        position:'absolute',
+        borderRadius:marginH,
+        margin:2, padding:paddingH,
+        alignSelf: 'flex-start'
+    },
 
     bio_container:{
         left:marginH, width:screen.width-2*marginH,
         top:barHeight,
         minHeight:150,
 
-        paddingLeft:paddingH,
-        paddingRight:paddingH,
+        // paddingLeft:paddingH,
+        // paddingRight:paddingH,
         paddingTop:paddingV,
         paddingBottom:paddingV,
         
@@ -142,11 +167,11 @@ export const styles = StyleSheet.create({
     relatedArtist_container:{        
         top:barHeight+marginH,
         //top:posterHeight*2-marginH+barHeight,
-        height:140,
+        height:300,
         // backgroundColor:'rgba(52, 52, 52, 0.4)', 
     },
     relatedArtist_title:{
-        left:marginH, paddingLeft:paddingH,
+        left:marginH, //paddingLeft:paddingH,
         color:'white',
     },
     relatedArtist_list:{
@@ -157,15 +182,37 @@ export const styles = StyleSheet.create({
     relatedArtist_artist_circle:{
         marginLeft:marginH,
 
-        height: 80,
-        width: 80,
-        borderRadius: 40,
+        height: relatedItemHeight,
+        width: relatedItemHeight,
+        borderRadius: relatedItemHeight/2,
+
         backgroundColor:'rgba(52, 52, 52, 0.4)', 
     },
     relatedArtist_img:{
-        height: 80,
-        width: 80,
-        borderRadius: 40,
+        height: relatedItemHeight,
+        width: relatedItemHeight,
+        borderRadius: relatedItemHeight/2,
+
+        backgroundColor:'rgba(52, 52, 52, 0.4)', 
+    },
+
+    album_container:{
+        backgroundColor:colors.screen_bg,
+        top:barHeight+marginH,
+        height:170,
+    },
+    artist_album:{
+        marginLeft:marginH,
+
+        height: relatedItemHeight,
+        width: relatedItemHeight,
+
+        backgroundColor:'rgba(52, 52, 52, 0.4)', 
+    },
+    artist_album_img:{
+        height: relatedItemHeight,
+        width: relatedItemHeight,
+
         backgroundColor:'rgba(52, 52, 52, 0.4)', 
     }
     

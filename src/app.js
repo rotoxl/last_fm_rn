@@ -8,9 +8,12 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import {colors} from './styles'
 import {store} from './store'
+
 import {ChartsTab} from './chartsTab'
 import {TagsTab} from './tagsTab'
+
 import {ArtistScreen} from './artistScreen'
+import {TagScreen} from './tagScreen'
 
 
 const tabs=createBottomTabNavigator({
@@ -62,6 +65,16 @@ const Stack=createStackNavigator({
     artist:{
         screen:ArtistScreen,
         navigationOptions: ({navigation, navigationOptions}) => {
+            navigation.store=navigationOptions.store    
+            return {
+                headerTintColor:colors.yellow_fg_inactive,
+                headerTransparent:true,
+            }
+        }
+    }, 
+    tag:{
+        screen:TagScreen,
+        navigationOptions: ({navigation, navigationOptions}) => {
             navigation.store=navigationOptions.store
             return {
                 headerTintColor:colors.yellow_fg_inactive,
@@ -79,6 +92,10 @@ const Stack=createStackNavigator({
             shadowOpacity: 0,
             backgroundColor:colors.header_bg,
         },
+    },
+    cardStyle: {//avoid temp white flash on navigation.push; also used in overscroll
+        // opacity: 1,
+        backgroundColor: colors.screen_bg,
     }
   }
 )

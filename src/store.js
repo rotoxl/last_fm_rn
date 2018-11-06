@@ -6,7 +6,6 @@ import React, { Component } from 'react'
 // const firebaseApp = firebase.initializeApp(firebaseConfig)
 
 export default store={
-    //http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=a75185adbaec912b811ba1a63a931b59&format=json
     data_getCharts(numpage, fnCallBack){
         var url=`http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=a75185adbaec912b811ba1a63a931b59&format=json`
         fetch(url)
@@ -24,7 +23,41 @@ export default store={
             fnCallBack(responseJson.artist)
           })
     },
-    mock_getCharts:function(){
+    data_getArtistAlbums(artist, fnCallBack){
+      var url=`http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=${artist}&api_key=a75185adbaec912b811ba1a63a931b59&format=json`
+        fetch(url)
+          .then((response) => response.json())
+          .then((responseJson) => {
+            fnCallBack(responseJson.topalbums.album)
+          })
+    },
+//------------    
+    data_getTopTags(fnCallBack){
+      var url=`http://ws.audioscrobbler.com/2.0/?method=chart.gettoptags&api_key=a75185adbaec912b811ba1a63a931b59&format=json`
+        fetch(url)
+          .then((response) => response.json())
+          .then((responseJson) => {
+            fnCallBack(responseJson.tags.tag)
+          })
+    },
+    data_getTagTopArtists(tag, fnCallBack){
+      var url=`http://ws.audioscrobbler.com/2.0/?method=tag.gettopartists&tag=${tag}&api_key=a75185adbaec912b811ba1a63a931b59&format=json`
+      fetch(url)
+        .then((response) => response.json())
+        .then((responseJson) => {
+          fnCallBack(responseJson.topartists.artist)
+        })
+    },
+    data_getTagTopAlbums(tag, fnCallBack){
+      var url=`http://ws.audioscrobbler.com/2.0/?method=tag.gettopalbums&tag=${tag}&api_key=a75185adbaec912b811ba1a63a931b59&format=json`
+      fetch(url)
+        .then((response) => response.json())
+        .then((responseJson) => {
+          fnCallBack(responseJson.albums.album)
+        })
+    },
+//------------    
+    _mock_getCharts:function(){
         return {
             "artists":{
                 "artist":[
@@ -41,7 +74,7 @@ export default store={
             }
         };
     },
-    mock_getArtistInfo:function(){
+    _mock_getArtistInfo:function(){
         return {
             "artist": {
               "name": "The Beatles",
