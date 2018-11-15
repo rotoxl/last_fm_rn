@@ -12,6 +12,7 @@ export const colors={
     accent:'#efb340', //yellow
     white:'#ffffff',
     black:'black',
+    placeholder: '#444444',
     // darkgray:'#4A4A4A',
     // lightgray:'#9B9B9B',
     // white:'white',
@@ -23,7 +24,7 @@ export const colors={
     // blue:'#40ade4',
     // purple:'#c17fd2',
 
-    debug: 'rgba(52, 52, 52, 0.4)'
+    debug: 'rgba(52, 52, 52, 0.4)',
 }
 var screen=Dimensions.get('window')
 
@@ -55,7 +56,7 @@ export const styles = StyleSheet.create({
         height: 204,
         maxHeight:204,
 
-        backgroundColor:colors.yellow_fg_inactive,
+        backgroundColor:colors.placeholder,
     }, 
 
     backdrop_container:{
@@ -91,12 +92,19 @@ export const styles = StyleSheet.create({
     title_block:{
         position:'absolute',
         left:marginH*2+posterWidth,
-        top:marginH+(posterHeight/2)
+        top:marginH,
+        height:posterHeight,
+    },
+    title_text:{
+        position:'absolute',
+        left:0, width:screen.width-(marginH*2+posterWidth-1),
+        bottom:marginH*4
     },
     title_lblock:{
         // position:'absolute',
         left:marginH,
         top:marginH+barHeight,
+        height:100,
         flex:1, 
         color:'white',
     },
@@ -106,11 +114,11 @@ export const styles = StyleSheet.create({
         textShadowOffset: {width: 0, height: 0},
         textShadowRadius: 7
     },
-
+    
     chips_container:{
         position:'absolute',
         left:0,
-        top:marginH*2.5,
+        bottom:paddingH,
 
         flex:1, 
         width:screen.width-(marginH*2+posterWidth)
@@ -132,15 +140,20 @@ export const styles = StyleSheet.create({
     },
     chip_text:{
         color:colors.white,
-        width:null,
+        
     },
     fchip:{
-        position:'absolute',
         borderRadius:marginH,
         margin:2, padding:paddingH,
-        alignSelf: 'flex-start'
+        alignSelf: 'center',
+        position:'relative'
     },
-
+    tagCloud:{
+        alignItems:'center', 
+        justifyContent:'space-around', 
+        flexDirection:'row', 
+        flexWrap:'wrap'
+    },
     bio_container:{
         left:marginH, width:screen.width-2*marginH,
         top:barHeight,
@@ -151,7 +164,7 @@ export const styles = StyleSheet.create({
         paddingTop:paddingV,
         paddingBottom:paddingV,
         
-        backgroundColor:'rgba(52, 52, 52, 0.4)', 
+        backgroundColor:colors.placeholder, 
     },
     bio_moreButton:{
         position:'absolute', 
@@ -168,7 +181,7 @@ export const styles = StyleSheet.create({
         top:barHeight+marginH,
         //top:posterHeight*2-marginH+barHeight,
         height:300,
-        // backgroundColor:'rgba(52, 52, 52, 0.4)', 
+        // backgroundColor:colors.debug 
     },
     relatedArtist_title:{
         left:marginH, //paddingLeft:paddingH,
@@ -186,14 +199,12 @@ export const styles = StyleSheet.create({
         width: relatedItemHeight,
         borderRadius: relatedItemHeight/2,
 
-        backgroundColor:'rgba(52, 52, 52, 0.4)', 
+        backgroundColor:colors.placeholder, 
     },
     relatedArtist_img:{
         height: relatedItemHeight,
         width: relatedItemHeight,
         borderRadius: relatedItemHeight/2,
-
-        backgroundColor:'rgba(52, 52, 52, 0.4)', 
     },
 
     album_container:{
@@ -207,13 +218,12 @@ export const styles = StyleSheet.create({
         height: relatedItemHeight,
         width: relatedItemHeight,
 
-        backgroundColor:'rgba(52, 52, 52, 0.4)', 
+        backgroundColor:colors.placeholder, 
     },
     artist_album_img:{
         height: relatedItemHeight,
         width: relatedItemHeight,
 
-        backgroundColor:'rgba(52, 52, 52, 0.4)', 
     }
     
 

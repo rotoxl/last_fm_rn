@@ -44,7 +44,7 @@ export class TagScreen extends React.Component {
     titleBlock=(tag)=>{
         return (
             <View style={styles.title_lblock}>
-                <Text style={[material.headline, styles.textWithShadow]}>
+                <Text style={[material.display1, styles.textWithShadow]}>
                     {this.capitalize(tag)}
                 </Text>
                 {/* {this.chips(tag)} */}
@@ -66,7 +66,7 @@ export class TagScreen extends React.Component {
         }
         else {            
             return (
-                <ScrollView contentContainerStyle={{flexGrow: 1, backgroundColor:colors.screen_bg}}>
+                <ScrollView contentContainerStyle={{backgroundColor:colors.screen_bg}}>
                     {/* {this.backdrop(img)} */}
                     
                     {/* <View style={styles.header_container}> */}

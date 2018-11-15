@@ -17,7 +17,7 @@ export class TagsTab extends React.Component {
             loading:true, 
             
             minFontSize: 12,
-            colorList: ['#ff5722', '#efb340', '#00bcd4', '#c8c8c8', ],
+            colorList: ['#ff5722', '#efb340', '#00bcd4', '#757575', ],
             style: {
                 width: deviceWidth / 1.2,
                 paddingLeft: 15,
@@ -44,7 +44,7 @@ export class TagsTab extends React.Component {
         for (var i=0; i<data.length; i++){
             data[i]._point=Math.round(100*Number(data[i].taggings)/Number(f0.taggings))
         }
-        return data.slice(0, 20)
+        return data//.slice(0, 20)//.reverse()
     }
     render() {
         if (this.state.loading){
@@ -56,33 +56,31 @@ export class TagsTab extends React.Component {
         }
         else {
             var l=[]
-            for (var i=this.state.data.length-1; i>=0; i--){
+            for (var i=0; i<this.state.data.length; i++){
                 var item=this.state.data[i]
                
                 l.push(
                     <TouchableHighlight 
-                        onPress={()=>this.tag_onClick(item)}
-                        key={item.name}
+                        onPress={this.tag_fnOnClick(item)}
+                        key={item.reach}
                         style={[
                             styles.fchip, 
                             {
-                                left: this.getRandomPaddingLeft(),
-                                top: this.getRandomPaddingTop(),
-                                // right: this.getRandomPaddingRight(),
-                                // bottom: this.getRandomPaddingBottom(),
-                                backgroundColor: this.getColor(i),
+                            backgroundColor: this.getColor(i),
                             }
                             ]}>
-                            <Text key={item.reach} style={[
+                            <Text style={[
                                 styles.chip_text, 
-                                {fontSize: this.state.minFontSize+(item._point/4)}
+                                {fontSize: this.state.minFontSize+(item._point/3)}
                             ]}>{item.name}</Text>
-                   </TouchableHighlight>
+                    </TouchableHighlight>
                 )
             }
-            return (
-                <ScrollView style={{backgroundColor:colors.screen_bg, flex:1, paddingBottom:1400, }}>
-                    {l}
+            return (//flex:1,  alignContent:'flex-start', flexDirection:'row'
+                <ScrollView style={{flex:1}}>
+                    <View style={styles.tagCloud}>
+                        {l}
+                    </View>
                 </ScrollView>
             )
         }
@@ -92,28 +90,32 @@ export class TagsTab extends React.Component {
         // return this.state.colorList[ii]
 
         var ret
-        if (i<5) 
+        var l=this.state.data.length
+        if (i< l/4) 
             ret=this.state.colorList[0]
-        else if (i<10) 
+        else if (i< (l/2.5)) 
             ret=this.state.colorList[1]
-        else if (i<15)
+        else if (i<(l/1.5))
             ret=this.state.colorList[2]
         else 
             ret=this.state.colorList[3]
 
         return ret
     }
-    getRandomPaddingLeft() {
-        var d=Math.floor(Math.random() * deviceWidth * .8)
-        // console.log('left', d)
-        return d
-    }
-    getRandomPaddingTop() {
-        var d=Math.floor(Math.random() * deviceHeight * .8)
-        // console.log('top', d)
-        return d
-    }
-    tag_onClick = (item) => {
-        this.props.navigation.navigate('tag', item.name)
+    // getRandomPaddingLeft() {
+    //     var d=Math.floor(Math.random() * deviceWidth * .8)
+    //     // console.log('left', d)
+    //     return d
+    // }
+    // getRandomPaddingTop() {
+    //     var d=Math.floor(Math.random() * deviceHeight * .5)
+    //     // console.log('top', d)
+    //     return d
+    // }
+    tag_fnOnClick = (item) => {
+        var self=this
+        return function(){
+            self.props.navigation.navigate('tag', item.name)
+        }
     }
 }

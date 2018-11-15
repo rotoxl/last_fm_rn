@@ -58,7 +58,6 @@ export class ChartsTab extends React.Component {
         }
     }
     item_onClick = (item) => {
-        // this.props.navigation.navigate({routeName:'artist', params:{ ...item }, key: 'samepage-'+new Date()})
         this.props.navigation.navigate({
             routeName:'artist', 
             params:{ ...item }, 

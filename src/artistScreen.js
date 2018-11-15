@@ -35,6 +35,8 @@ export class ArtistScreen extends React.Component {
         setTimeout(function(){
             var n=self.props.navigation.state.params.name
             this.store.data_getArtistInfo(n, function(data){
+                console.log(data)
+
                 self.setState({artist:data, loading:false})
             })
             this.store.data_getArtistAlbums(n, function(data){
@@ -64,7 +66,7 @@ export class ArtistScreen extends React.Component {
     titleBlock=(artist)=>{
         return (
             <View style={styles.title_block}>
-                <Text style={[material.headline, styles.textWithShadow]}>
+                <Text style={[material.headline, styles.textWithShadow, styles.title_text]} numberOfLines={3}>
                     {artist.name}
                 </Text>
                 <ChipsWidget data={artist.tags.tag} navigation={this.props.navigation} />

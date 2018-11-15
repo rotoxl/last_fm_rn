@@ -31,7 +31,26 @@ export default store={
             fnCallBack(responseJson.topalbums.album)
           })
     },
-//------------    
+//------------
+    data_getArtistSearch(artist, fnCallBack){
+      //http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=the%20beatles&api_key=a75185adbaec912b811ba1a63a931b59&format=json
+      var url=`http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=${artist}&api_key=a75185adbaec912b811ba1a63a931b59&format=json`
+      fetch(url)
+        .then((response) => response.json())
+        .then((responseJson) => {
+          fnCallBack(responseJson.results.artistmatches.artist)
+        })
+    },
+    data_getAlbumSearch(album, fnCallBack){
+      //http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=the%20beatles&api_key=a75185adbaec912b811ba1a63a931b59&format=json
+      var url=`http://ws.audioscrobbler.com/2.0/?method=album.search&album=${album}&api_key=a75185adbaec912b811ba1a63a931b59&format=json`
+      fetch(url)
+        .then((response) => response.json())
+        .then((responseJson) => {
+          fnCallBack(responseJson.results.albummatches.album)
+        })
+    },
+//------------
     data_getTopTags(fnCallBack){
       var url=`http://ws.audioscrobbler.com/2.0/?method=chart.gettoptags&api_key=a75185adbaec912b811ba1a63a931b59&format=json`
         fetch(url)
